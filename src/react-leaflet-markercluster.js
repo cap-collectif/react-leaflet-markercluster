@@ -5,8 +5,6 @@ import {LayerGroup} from 'react-leaflet';
 import L from 'leaflet'
 import 'leaflet.markercluster';
 
-import './style.scss';
-
 export default class MarkerClusterGroup extends LayerGroup {
 
   componentWillMount() {
