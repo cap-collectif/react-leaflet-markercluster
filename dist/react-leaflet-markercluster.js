@@ -41,23 +41,25 @@ var MarkerClusterGroup = function (_LayerGroup) {
   _createClass(MarkerClusterGroup, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       L = require('leaflet');
       require('leaflet.markercluster');
-      this.setState({ loaded: true });
+      this.setState({ loaded: true }, function () {
+        // Override auto created leafletElement with L.markerClusterGroup element
+        _this2.leafletElement = L.markerClusterGroup(_this2.props.options);
 
-      // Override auto created leafletElement with L.markerClusterGroup element
-      this.leafletElement = L.markerClusterGroup(this.props.options);
+        if (_this2.props.markers.length) {
+          _this2.addLayersWithMarkersFromProps(_this2.props.markers);
+        }
 
-      if (this.props.markers.length) {
-        this.addLayersWithMarkersFromProps(this.props.markers);
-      }
+        _this2.props.wrapperOptions.enableDefaultStyle && (_this2.context.map._container.className += ' marker-cluster-styled');
 
-      this.props.wrapperOptions.enableDefaultStyle && (this.context.map._container.className += ' marker-cluster-styled');
+        !_this2.props.wrapperOptions.disableDefaultAnimation && (_this2.context.map._container.className += ' marker-cluster-animated');
 
-      !this.props.wrapperOptions.disableDefaultAnimation && (this.context.map._container.className += ' marker-cluster-animated');
-
-      // Init listeners for markerClusterGroup leafletElement only once
-      this.initEventListeners(this.leafletElement);
+        // Init listeners for markerClusterGroup leafletElement only once
+        _this2.initEventListeners(_this2.leafletElement);
+      });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -113,24 +115,24 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'initEventListeners',
     value: function initEventListeners(markerClusterGroup) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.props.onMarkerClick && markerClusterGroup.on('click', function (marker) {
-        _this2.props.onMarkerClick(marker.layer);
+        _this3.props.onMarkerClick(marker.layer);
       });
 
       this.props.onClusterClick && markerClusterGroup.on('clusterclick', function (cluster) {
-        _this2.props.onClusterClick(cluster.layer);
+        _this3.props.onClusterClick(cluster.layer);
       });
 
       this.props.onPopupClose && markerClusterGroup.on('popupclose', function (map) {
-        _this2.props.onPopupClose(map.popup);
+        _this3.props.onPopupClose(map.popup);
       });
     }
   }, {
     key: 'addLayersWithReactLeafletMarkers',
     value: function addLayersWithReactLeafletMarkers() {
-      var _this3 = this;
+      var _this4 = this;
 
       var leafletMarkers = [];
 
@@ -142,13 +144,13 @@ var MarkerClusterGroup = function (_LayerGroup) {
             if (marker) {
               leafletMarkers.push(marker.leafletElement);
 
-              if (index === _this3.props.children.length - 1 ||
+              if (index === _this4.props.children.length - 1 ||
               // addClusteredMarkersToMap when there is only one marker
-              !Array.isArray(_this3.props.children)) {
+              !Array.isArray(_this4.props.children)) {
                 // Add markers leafletElements to the markerClusterGroup
-                _this3.leafletElement.addLayers(leafletMarkers);
+                _this4.leafletElement.addLayers(leafletMarkers);
                 // Add clustered markers to the leaflet map
-                _this3.layerContainer.addLayer(_this3.leafletElement);
+                _this4.layerContainer.addLayer(_this4.leafletElement);
               }
             }
           },
