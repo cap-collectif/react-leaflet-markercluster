@@ -32,18 +32,18 @@ var MarkerClusterGroup = function (_LayerGroup) {
   function MarkerClusterGroup() {
     _classCallCheck(this, MarkerClusterGroup);
 
-    return _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this));
+
+    _this.state = { loaded: false };
+    return _this;
   }
 
   _createClass(MarkerClusterGroup, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      if (typeof window === 'undefined') {
-        return;
-      }
-
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       L = require('leaflet');
       require('leaflet.markercluster');
+      this.setState({ loaded: true });
 
       // Override auto created leafletElement with L.markerClusterGroup element
       this.leafletElement = L.markerClusterGroup(this.props.options);
@@ -164,8 +164,8 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'render',
     value: function render() {
-      if (typeof window === 'undefined') {
-        return;
+      if (!this.state.loaded) {
+        return null;
       }
 
       return this.props.children ? _react2.default.createElement(

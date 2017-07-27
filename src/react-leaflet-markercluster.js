@@ -6,31 +6,33 @@ let L;
 
 export default class MarkerClusterGroup extends LayerGroup {
 
-  componentWillMount() {
-    if (typeof window === 'undefined') {
-	    return;
-    }
+  constructor() {
+    super();
+    this.state = { loaded: false };
+  }
 
+  componentDidMount() {
 	  L = require('leaflet');
 	  require('leaflet.markercluster');
+	  this.setState({ loaded: true });
 
-    // Override auto created leafletElement with L.markerClusterGroup element
-    this.leafletElement = L.markerClusterGroup(this.props.options);
+	  // Override auto created leafletElement with L.markerClusterGroup element
+	  this.leafletElement = L.markerClusterGroup(this.props.options);
 
-    if (this.props.markers.length) {
-      this.addLayersWithMarkersFromProps(this.props.markers);
-    }
+	  if (this.props.markers.length) {
+		  this.addLayersWithMarkersFromProps(this.props.markers);
+	  }
 
-    this.props.wrapperOptions.enableDefaultStyle && (
-      this.context.map._container.className += ' marker-cluster-styled'
-    );
+	  this.props.wrapperOptions.enableDefaultStyle && (
+		  this.context.map._container.className += ' marker-cluster-styled'
+	  );
 
-    !this.props.wrapperOptions.disableDefaultAnimation && (
-      this.context.map._container.className += ' marker-cluster-animated'
-    );
+	  !this.props.wrapperOptions.disableDefaultAnimation && (
+		  this.context.map._container.className += ' marker-cluster-animated'
+	  );
 
-    // Init listeners for markerClusterGroup leafletElement only once
-    this.initEventListeners(this.leafletElement);
+	  // Init listeners for markerClusterGroup leafletElement only once
+	  this.initEventListeners(this.leafletElement);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -143,8 +145,8 @@ export default class MarkerClusterGroup extends LayerGroup {
   }
 
   render() {
-	  if (typeof window === 'undefined') {
-		  return;
+	  if (!this.state.loaded) {
+		  return null;
 	  }
 
     return this.props.children
