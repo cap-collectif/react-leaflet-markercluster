@@ -34,7 +34,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
 
     var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this, props));
 
-    _this.state.loaded = false;
+    _this.state = { loaded: false };
     return _this;
   }
 
