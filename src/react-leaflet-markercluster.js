@@ -137,6 +137,11 @@ export default class MarkerClusterGroup extends LayerGroup {
   }
 
   render() {
+    if (!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+      return null;
+    }
+
+
     return this.props.children
     ? (
       <section className="marker-cluster-group">

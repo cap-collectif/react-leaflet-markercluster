@@ -161,6 +161,10 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'render',
     value: function render() {
+      if (!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+        return null;
+      }
+
       return this.props.children ? _react2.default.createElement(
         'section',
         { className: 'marker-cluster-group' },
