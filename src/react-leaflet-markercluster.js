@@ -1,7 +1,7 @@
 import React, {Children, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 
-import {LayerGroup} from 'react-leaflet-universal';
+import {LayerGroup} from 'react-leaflet';
 
 let L;
 
@@ -184,7 +184,7 @@ MarkerClusterGroup.propTypes = {
   onMarkerClick: PropTypes.func,
   onClusterClick: PropTypes.func,
   onPopupClose: PropTypes.func
-}
+};
 
 MarkerClusterGroup.defaultProps = {
   markers: [],

@@ -14,7 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactLeafletUniversal = require('react-leaflet-universal');
+var _reactLeaflet = require('react-leaflet');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -183,7 +183,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }]);
 
   return MarkerClusterGroup;
-}(_reactLeafletUniversal.LayerGroup);
+}(_reactLeaflet.LayerGroup);
 
 exports.default = MarkerClusterGroup;
 

@@ -4844,10 +4844,6 @@ react-highlight@^0.10.0:
     react "^15.5.4"
     react-dom "^15.5.4"
 
-react-leaflet-universal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-universal/-/react-leaflet-universal-1.1.0.tgz#0efda955dcc0308a7cf79c430cb421ec84903e98"
-
 react-leaflet@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.4.0.tgz#45b0d1ca2fe8fff91c3e023cfe4eab0783416491"
