@@ -2,10 +2,17 @@ import React, {Children, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 
 import {LayerGroup} from 'react-leaflet';
-import L from 'leaflet'
+// import L from 'leaflet'
 import 'leaflet.markercluster';
 
+let L;
+
 export default class MarkerClusterGroup extends LayerGroup {
+
+  constructor(props) {
+    super(props);
+    this.state.loaded = false;
+  }
 
   componentWillMount() {
     // Override auto created leafletElement with L.markerClusterGroup element
@@ -25,6 +32,11 @@ export default class MarkerClusterGroup extends LayerGroup {
 
     // Init listeners for markerClusterGroup leafletElement only once
     this.initEventListeners(this.leafletElement);
+  }
+
+  componentDidMount() {
+	  L = require('leaflet');
+	  this.setState({ loaded: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -137,10 +149,9 @@ export default class MarkerClusterGroup extends LayerGroup {
   }
 
   render() {
-    if (!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+    if (!this.state.loaded) {
       return null;
     }
-
 
     return this.props.children
     ? (
