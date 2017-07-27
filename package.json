@@ -66,5 +66,8 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-leaflet": "^1.4.0"
+  },
+  "dependencies": {
+    "react-leaflet-universal": "^1.1.0"
   }
 }

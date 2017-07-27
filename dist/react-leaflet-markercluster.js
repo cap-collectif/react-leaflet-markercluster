@@ -14,7 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactLeaflet = require('react-leaflet');
+var _reactLeafletUniversal = require('react-leaflet-universal');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,9 +41,8 @@ var MarkerClusterGroup = function (_LayerGroup) {
   _createClass(MarkerClusterGroup, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      if (typeof window !== 'undefined') {
-        L = require('leaflet');
-        require('leaflet.markercluster');
+      if (typeof window === 'undefined') {
+        return;
       }
 
       // Override auto created leafletElement with L.markerClusterGroup element
@@ -63,6 +62,8 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      L = require('leaflet');
+      require('leaflet.markercluster');
       this.setState({ loaded: true });
     }
   }, {
@@ -183,7 +184,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }]);
 
   return MarkerClusterGroup;
-}(_reactLeaflet.LayerGroup);
+}(_reactLeafletUniversal.LayerGroup);
 
 exports.default = MarkerClusterGroup;
 
