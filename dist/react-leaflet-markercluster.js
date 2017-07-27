@@ -41,6 +41,11 @@ var MarkerClusterGroup = function (_LayerGroup) {
   _createClass(MarkerClusterGroup, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      if (typeof window !== 'undefined') {
+        L = require('leaflet');
+        require('leaflet.markercluster');
+      }
+
       // Override auto created leafletElement with L.markerClusterGroup element
       this.leafletElement = L.markerClusterGroup(this.props.options);
 
@@ -58,8 +63,6 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      L = require('leaflet');
-      require('leaflet.markercluster');
       this.setState({ loaded: true });
     }
   }, {
