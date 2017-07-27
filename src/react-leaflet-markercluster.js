@@ -7,8 +7,8 @@ let L;
 
 export default class MarkerClusterGroup extends LayerGroup {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { loaded: false };
   }
 

@@ -29,10 +29,10 @@ var L = void 0;
 var MarkerClusterGroup = function (_LayerGroup) {
   _inherits(MarkerClusterGroup, _LayerGroup);
 
-  function MarkerClusterGroup(props) {
+  function MarkerClusterGroup() {
     _classCallCheck(this, MarkerClusterGroup);
 
-    var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this));
 
     _this.state = { loaded: false };
     return _this;
