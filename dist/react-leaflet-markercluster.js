@@ -32,10 +32,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
   function MarkerClusterGroup() {
     _classCallCheck(this, MarkerClusterGroup);
 
-    var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this));
-
-    _this.state = { loaded: false };
-    return _this;
+    return _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).apply(this, arguments));
   }
 
   _createClass(MarkerClusterGroup, [{
@@ -61,11 +58,6 @@ var MarkerClusterGroup = function (_LayerGroup) {
 
       // Init listeners for markerClusterGroup leafletElement only once
       this.initEventListeners(this.leafletElement);
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({ loaded: true });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -172,8 +164,8 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'render',
     value: function render() {
-      if (!this.state.loaded) {
-        return null;
+      if (typeof window === 'undefined') {
+        return;
       }
 
       return this.props.children ? _react2.default.createElement(

@@ -6,11 +6,6 @@ let L;
 
 export default class MarkerClusterGroup extends LayerGroup {
 
-  constructor() {
-    super();
-    this.state = { loaded: false };
-  }
-
   componentWillMount() {
     if (typeof window === 'undefined') {
 	    return;
@@ -36,10 +31,6 @@ export default class MarkerClusterGroup extends LayerGroup {
 
     // Init listeners for markerClusterGroup leafletElement only once
     this.initEventListeners(this.leafletElement);
-  }
-
-  componentDidMount() {
-	  this.setState({ loaded: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -152,9 +143,9 @@ export default class MarkerClusterGroup extends LayerGroup {
   }
 
   render() {
-    if (!this.state.loaded) {
-      return null;
-    }
+	  if (typeof window === 'undefined') {
+		  return;
+	  }
 
     return this.props.children
     ? (
