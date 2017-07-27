@@ -16,10 +16,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactLeaflet = require('react-leaflet');
 
-var _leaflet = require('leaflet');
-
-var _leaflet2 = _interopRequireDefault(_leaflet);
-
 require('leaflet.markercluster');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29,21 +25,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import L from 'leaflet'
+
+
+var L = void 0;
 
 var MarkerClusterGroup = function (_LayerGroup) {
   _inherits(MarkerClusterGroup, _LayerGroup);
 
-  function MarkerClusterGroup() {
+  function MarkerClusterGroup(props) {
     _classCallCheck(this, MarkerClusterGroup);
 
-    return _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MarkerClusterGroup.__proto__ || Object.getPrototypeOf(MarkerClusterGroup)).call(this, props));
+
+    _this.state.loaded = false;
+    return _this;
   }
 
   _createClass(MarkerClusterGroup, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       // Override auto created leafletElement with L.markerClusterGroup element
-      this.leafletElement = _leaflet2.default.markerClusterGroup(this.props.options);
+      this.leafletElement = L.markerClusterGroup(this.props.options);
 
       if (this.props.markers.length) {
         this.addLayersWithMarkersFromProps(this.props.markers);
@@ -55,6 +58,12 @@ var MarkerClusterGroup = function (_LayerGroup) {
 
       // Init listeners for markerClusterGroup leafletElement only once
       this.initEventListeners(this.leafletElement);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      L = require('leaflet');
+      this.setState({ loaded: true });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -94,7 +103,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
       filteredMarkers.forEach(function (marker) {
         var currentMarkerOptions = marker.options ? Object.assign({}, marker.options) : null;
 
-        var leafletMarker = _leaflet2.default.marker([marker.lat, marker.lng], currentMarkerOptions || markersOptions);
+        var leafletMarker = L.marker([marker.lat, marker.lng], currentMarkerOptions || markersOptions);
 
         marker.popup && leafletMarker.bindPopup(marker.popup);
         marker.tooltip && leafletMarker.bindTooltip(marker.tooltip);
@@ -161,7 +170,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }, {
     key: 'render',
     value: function render() {
-      if (!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+      if (!this.state.loaded) {
         return null;
       }
 
