@@ -49,6 +49,8 @@ var MarkerClusterGroup = function (_LayerGroup) {
         // Override auto created leafletElement with L.markerClusterGroup element
         _this2.leafletElement = L.markerClusterGroup(_this2.props.options);
 
+        console.log(_this2.context);
+
         if (_this2.props.markers.length) {
           _this2.addLayersWithMarkersFromProps(_this2.props.markers);
         }

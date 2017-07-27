@@ -18,6 +18,8 @@ export default class MarkerClusterGroup extends LayerGroup {
 		  // Override auto created leafletElement with L.markerClusterGroup element
 		  this.leafletElement = L.markerClusterGroup(this.props.options);
 
+		  console.log(this.context);
+
 		  if (this.props.markers.length) {
 			  this.addLayersWithMarkersFromProps(this.props.markers);
 		  }
