@@ -1,8 +1,8 @@
 import React, {Children, cloneElement} from 'react';
 import PropTypes from 'prop-types';
-import {LayerGroup} from 'react-leaflet-universal';
 
 let L;
+let LayerGroup;
 
 export default class MarkerClusterGroup extends LayerGroup {
 
@@ -13,6 +13,7 @@ export default class MarkerClusterGroup extends LayerGroup {
 
   componentDidMount() {
 	  L = require('leaflet');
+	  LayerGroup = require('react-leaflet').LayerGroup;
 	  require('leaflet.markercluster');
 	  this.setState({ loaded: true }, () => {
 		  // Override auto created leafletElement with L.markerClusterGroup element

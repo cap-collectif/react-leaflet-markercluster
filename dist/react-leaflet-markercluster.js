@@ -14,8 +14,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactLeafletUniversal = require('react-leaflet-universal');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25,6 +23,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var L = void 0;
+var LayerGroup = void 0;
 
 var MarkerClusterGroup = function (_LayerGroup) {
   _inherits(MarkerClusterGroup, _LayerGroup);
@@ -44,6 +43,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
       var _this2 = this;
 
       L = require('leaflet');
+      LayerGroup = require('react-leaflet').LayerGroup;
       require('leaflet.markercluster');
       this.setState({ loaded: true }, function () {
         // Override auto created leafletElement with L.markerClusterGroup element
@@ -181,7 +181,7 @@ var MarkerClusterGroup = function (_LayerGroup) {
   }]);
 
   return MarkerClusterGroup;
-}(_reactLeafletUniversal.LayerGroup);
+}(LayerGroup);
 
 exports.default = MarkerClusterGroup;
 
